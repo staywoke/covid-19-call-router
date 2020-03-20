@@ -10,27 +10,32 @@ export const getCovidLineWithZip = (
     name: string;
   };
 } | null => {
+  // Find location of zip
   const location = zipcodes.lookup(zip);
 
   if (!location) {
     return null;
   }
 
+  // Map state code to state name
   const stateName = stateDict[location.state];
 
   if (!stateName) {
     return null;
   }
 
+  // Map state name to phone number
   const phoneNumber = numbers[stateName.toUpperCase()];
 
   if (!phoneNumber) {
     return null;
   }
 
+  // Return the result
   return {
     zip,
-    phoneNumber,
+    phoneNumber:
+      phoneNumber.length === 10 ? `+1${phoneNumber}` : phoneNumber,
     state: {
       code: location.state,
       name: stateName,
@@ -40,56 +45,56 @@ export const getCovidLineWithZip = (
 
 // Directly exported from spreadsheet:
 const data = `
-  Alabama	(808) 295-6453
-  Alaska	(833) 613-7000
-  Arizona	(508) 978-8607
-  Arkansas	(410) 358-9943
-  California	(518) 952-2714
-  Colorado	(517) 302-3535
-  Connecticut	(368) 649-1635
-  Delaware	(771) 853-2558
-  Florida	(463) 206-5982
-  Georgia	(387) 810-2172
-  Hawaii	(574) 377-1549
-  Idaho	(505) 418-3373
-  Illinois  (699) 684-7081
-  Indiana 
-  Iowa	(492) 940-7353
-  Kansas	(785) 454-9272
-  Kentucky	(374) 405-9407
-  Louisiana	(966) 760-9095
-  Maine	(560) 539-4718
-  Maryland	(986) 670-0635
-  Massachusetts	(917) 520-3549
-  Michigan	(890) 815-5157
-  Minnesota	(841) 454-3175
-  Mississippi	(413) 444-0335
-  Missouri	(835) 368-9521
-  Montana	(552) 838-7108
-  Nebraska	(248) 573-3925
-  Nevada	(716) 289-4752
-  New Hampshire	(248) 573-3925
-  New Jersey	(429) 790-3739
-  New Mexico	(723) 936-5126
-  New York	(649) 433-3480
-  North Carolina	(252) 732-7500
-  North Dakota	(324) 761-7224
-  Ohio	(726) 632-4474
-  Oklahoma	(333) 559-6873
-  Oregon	(768) 764-3099
-  Pennsylvania	(720) 501-1796
-  Rhode Island	(720) 501-1796
-  South Carolina	(658) 255-2843
-  South Dakota	(681) 468-1104
-  Tennessee	(612) 445-4699
-  Texas	(205) 606-5809
-  Utah	(208) 657-0617
-  Vermont	(566) 875-8000
-  Virginia	(453) 522-2639
-  Washington	(232) 371-1604
-  West Virginia	(735) 528-4293
-  Wisconsin	(668) 319-7615
-  Wyoming	(294) 360-9938
+  Alabama	(888) 264-2256
+  Alaska	
+  Arizona	(844) 542-8201 
+  Arkansas	(800) 803-7847 
+  California	
+  Colorado	(877) 462-2911
+  Connecticut	211
+  Delaware	(866) 408-1899
+  Florida	(866) 779-6121
+  Georgia	(844) 442-2681 
+  Hawaii	211
+  Idaho	
+  Illinois	(800) 889-3931 
+  Iowa	211
+  Indiana	(877) 826-0011 
+  Kansas	(866) 534-3463
+  Kentucky	(800) 722-5725
+  Louisiana	211
+  Maine	211
+  Maryland	
+  Massachusetts	211
+  Michigan	(888) 535-6136
+  Minnesota	(651) 201-3920 
+  Mississippi	(877) 978-6453
+  Missouri	(877) 435-8411
+  Montana	
+  Nebraska	(402) 552-6645
+  Nevada	(702) 759-4636
+  New Hampshire	
+  New Jersey	211
+  New Mexico	(855) 600-3453
+  New York	(888) 364-3065
+  North Carolina	(888) 892-1162
+  North Dakota	(866) 207-2880
+  Ohio	(833) 427-5634
+  Oklahoma	(877) 215-8336
+  Oregon	211
+  Pennsylvania	(877) 724‐3258
+  Rhode Island	(401) 222-8022
+  South Carolina	(855) 472-3432
+  South Dakota	(800) 997-2880
+  Tennessee	(877) 857-2945
+  Texas	211
+  Utah	(800) 456-7707
+  Vermont	(866) 652-4636 
+  Virginia	(877) 275-8343
+  Washington	(800) 525-0127
+  West Virginia	(800) 887-4304
+  Wisconsin	
+  Wyoming	
 `;
 
 const numbers: {
@@ -101,8 +106,7 @@ const numbers: {
     const [state, number] = line.trim().split('\t');
     return {
       ...dict,
-      [state.toUpperCase()]:
-        number && '+1' + number.replace(/[^0-9]/g, ''),
+      [state.toUpperCase()]: number && number.replace(/[^0-9]/g, ''),
     };
   }, {});
 
