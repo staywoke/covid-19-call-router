@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import makeServerless from 'serverless-http';
 import VoiceResponse from 'twilio/lib/twiml/VoiceResponse';
 import { getCovidLineWithZip } from './numbers';
 import { parseConfig } from './config';
@@ -34,6 +35,7 @@ const Responder = (
 };
 
 const app = express();
+export const serverless = makeServerless(app);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
