@@ -56,7 +56,7 @@ Delaware	(866) 408-1899
 Florida	(866) 779-6121
 Georgia	(844) 442-2681 
 Hawaii	(877) 275-6569
-Idaho	
+Idaho	(800) 926-2588
 Illinois	(800) 889-3931 
 Iowa	(800) 244-7431
 Indiana	(877) 826-0011 
@@ -64,8 +64,8 @@ Kansas	(866) 534-3463
 Kentucky	(800) 722-5725
 Louisiana	(844) 268-6799
 Maine	(877) 463-6207
-Maryland	
-Massachusetts	(877)  211-6277
+Maryland	(800) 492-0618 
+Massachusetts	(877) 211-6277
 Michigan	(888) 535-6136
 Minnesota	(651) 201-3920 
 Mississippi	(877) 978-6453
@@ -73,13 +73,13 @@ Missouri	(877) 435-8411
 Montana	(888) 333-0461
 Nebraska	(402) 552-6645
 Nevada	(702) 759-4636
-New Hampshire	
+New Hampshire	(866) 444-4211
 New Jersey	(800) 222-1222
 New Mexico	(855) 600-3453
 New York	(888) 364-3065
 North Carolina	(888) 892-1162
 North Dakota	(866) 207-2880
-Ohio	(833).427-5634
+Ohio	(833) 427-5634
 Oklahoma	(877) 215-8336
 Oregon	(866) 698-6155
 Pennsylvania	(877) 724‐3258
@@ -93,8 +93,8 @@ Vermont	(866) 652-4636
 Virginia	(877) 275-8343
 Washington	(800) 525-0127
 West Virginia	(800) 887-4304
-Wisconsin	
-Wyoming	
+Wisconsin	(877) 947-2211
+Wyoming	(888) 425-7138
 `;
 
 const numbers: {
