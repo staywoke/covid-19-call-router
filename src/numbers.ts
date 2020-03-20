@@ -10,27 +10,32 @@ export const getCovidLineWithZip = (
     name: string;
   };
 } | null => {
+  // Find location of zip
   const location = zipcodes.lookup(zip);
 
   if (!location) {
     return null;
   }
 
+  // Map state code to state name
   const stateName = stateDict[location.state];
 
   if (!stateName) {
     return null;
   }
 
+  // Map state name to phone number
   const phoneNumber = numbers[stateName.toUpperCase()];
 
   if (!phoneNumber) {
     return null;
   }
 
+  // Return the result
   return {
     zip,
-    phoneNumber,
+    phoneNumber:
+      phoneNumber.length === 10 ? `+1${phoneNumber}` : phoneNumber,
     state: {
       code: location.state,
       name: stateName,
@@ -101,8 +106,7 @@ const numbers: {
     const [state, number] = line.trim().split('\t');
     return {
       ...dict,
-      [state.toUpperCase()]:
-        number && '+1' + number.replace(/[^0-9]/g, ''),
+      [state.toUpperCase()]: number && number.replace(/[^0-9]/g, ''),
     };
   }, {});
 

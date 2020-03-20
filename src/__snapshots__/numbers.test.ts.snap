@@ -1,8 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`get phone number by zip returns number for valid zip 1`] = `
+exports[`get phone number by zip returns number as-is for non-10 digits 1`] = `
 Object {
-  "phoneNumber": "+16494333480",
+  "phoneNumber": "211",
+  "state": Object {
+    "code": "CT",
+    "name": "Connecticut",
+  },
+  "zip": "06776",
+}
+`;
+
+exports[`get phone number by zip returns number with +1 prepended if 10 digits 1`] = `
+Object {
+  "phoneNumber": "+18883643065",
   "state": Object {
     "code": "NY",
     "name": "New York",
