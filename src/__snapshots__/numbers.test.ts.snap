@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get phone number by zip returns number for valid zip 1`] = `
+Object {
+  "phoneNumber": "+16494333480",
+  "state": Object {
+    "code": "NY",
+    "name": "New York",
+  },
+  "zip": "11201",
+}
+`;
