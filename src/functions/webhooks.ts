@@ -1,4 +1,12 @@
+import express from 'express';
 import createServerlessHandler from 'serverless-http';
-import app from '../app';
+import { createRouter } from '../router';
 
-export const handler = createServerlessHandler(app);
+const NETLIFY_PATH_PREFIX = '/.netlify/functions/webhooks';
+
+export const handler = createServerlessHandler(
+  express().use(
+    NETLIFY_PATH_PREFIX,
+    createRouter(NETLIFY_PATH_PREFIX),
+  ),
+);
