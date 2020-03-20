@@ -74,7 +74,7 @@ const data = `
   New York	(888) 364-3065
   North Carolina	(888) 892-1162
   North Dakota	(866) 207-2880
-  Ohio	(833).427-5634
+  Ohio	(833) 427-5634
   Oklahoma	(877) 215-8336
   Oregon	211
   Pennsylvania	(877) 724‐3258
