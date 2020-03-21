@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get phone number by zip CA zip returns zip object with county, state w/o phone number 1`] = `
+Object {
+  "code": "928[0-9]{2}",
+  "county": Object {
+    "name": "ORANGE",
+    "phoneNumber": "+18886004357",
+  },
+  "getCovidPhoneNumber": [Function],
+  "state": Object {
+    "code": "CA",
+    "name": "California",
+  },
+}
+`;
+
+exports[`get phone number by zip non-CA zip returns zip object without county, state w/ phone number 1`] = `
+Object {
+  "code": "11201",
+  "getCovidPhoneNumber": [Function],
+  "state": Object {
+    "code": "NY",
+    "name": "New York",
+    "phoneNumber": "+18883643065",
+  },
+}
+`;

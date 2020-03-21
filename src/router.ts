@@ -2,7 +2,7 @@ import path from 'path';
 import { Router, RequestHandler, Request } from 'express';
 import bodyParser from 'body-parser';
 import VoiceResponse from 'twilio/lib/twiml/VoiceResponse';
-import { getCovidLineWithZip } from './numbers';
+import { lookupZip } from './lookup';
 
 const Responder = (
   handler: (twiml: VoiceResponse, inputs: Request['body']) => any,
@@ -72,17 +72,27 @@ export const createRouter = (pathPrefix: string = '/'): Router => {
         paths.ZIP_PROCESS,
         Responder((twiml, values) => {
           const zip = values.Digits;
-          const result = getCovidLineWithZip(zip);
+          const result = lookupZip(zip);
 
           if (!result) {
             twiml.say(strings.ZIP_NO_MATCH);
             return;
           }
 
+          const phoneNumber = result.getCovidPhoneNumber();
+
+          if (!phoneNumber) {
+            twiml.say(strings.ZIP_NO_MATCH);
+            return;
+          }
+
           twiml.say(
-            `Connecting you to the ${result.state.name} line.`,
+            `Connecting you to the ${result.county?.name || ''} ${
+              result.state.name
+            } line.`,
           );
-          twiml.dial(result.phoneNumber);
+
+          twiml.dial(phoneNumber);
         }),
       )
   );
