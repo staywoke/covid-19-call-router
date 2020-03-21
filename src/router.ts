@@ -19,7 +19,7 @@ const strings = {
     'This service routes you to your local Covid 19 informational line.',
   ZIP_PROMPT: 'Please enter your 5-digit zipcode.',
   ZIP_NO_MATCH:
-    'Sorry, we could not locate a phone number for that zip code.',
+    "Sorry, there currently isn't a hotline for your zipcode. Please check back later.",
 };
 
 const paths = {
