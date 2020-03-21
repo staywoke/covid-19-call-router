@@ -122,12 +122,16 @@ export const createRouter = (pathPrefix: string = '/'): Router => {
 
           switch (code) {
             case '69':
-              return twiml.say(`That's bush league.`);
+              twiml.say(`That's bush league.`);
+              break;
             case '28':
-              return twiml.say('Heuvos rancheros.');
+              twiml.say('Heuvos rancheros.');
+              break;
             default:
-              return twiml.redirect(paths.HELLO);
+              break;
           }
+
+          twiml.redirect(prefixed(paths.HELLO));
         }),
       )
   );
