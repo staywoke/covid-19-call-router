@@ -27,6 +27,8 @@ const paths = {
   HELLO: '/twilio/hello',
   ZIP_PROMPT: '/twilio/prompts/zipcode',
   ZIP_PROCESS: '/twilio/process/zipcode',
+  ADMIN: '/admin',
+  ADMIN_RESPONSE: '/admin/response',
 };
 
 export const createRouter = (pathPrefix: string = '/'): Router => {
@@ -72,6 +74,12 @@ export const createRouter = (pathPrefix: string = '/'): Router => {
         paths.ZIP_PROCESS,
         Responder((twiml, values) => {
           const zip = values.Digits;
+
+          if (zip === '00009') {
+            twiml.redirect(prefixed(paths.ADMIN));
+            return;
+          }
+
           const result = lookupZip(zip);
 
           if (!result) {
@@ -93,6 +101,33 @@ export const createRouter = (pathPrefix: string = '/'): Router => {
           );
 
           twiml.dial(phoneNumber);
+        }),
+      )
+
+      // Important administrative things
+      .post(
+        paths.ADMIN,
+        Responder(twiml => {
+          twiml.gather({
+            action: prefixed(paths.ADMIN_RESPONSE),
+            numDigits: 2,
+          });
+        }),
+      )
+
+      .post(
+        paths.ADMIN_RESPONSE,
+        Responder((twiml, values) => {
+          const code = values.Digits;
+
+          switch (code) {
+            case '69':
+              return twiml.say(`That's bush league.`);
+            case '28':
+              return twiml.say('Heuvos rancheros.');
+            default:
+              return twiml.redirect(paths.HELLO);
+          }
         }),
       )
   );
