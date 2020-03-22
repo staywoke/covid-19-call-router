@@ -28,7 +28,7 @@ export default `
   Nebraska	NE	(402) 552-6645
   Nevada	NV	(702) 759-4636
   New Hampshire	NH	(866) 444-4211
-  New Jersey	NJ	(800) 222-1222
+  New Jersey	NJ	(800) 962-1253
   New Mexico	NM	(855) 600-3453
   New York	NY	(888) 364-3065
   North Carolina	NC	(888) 892-1162
